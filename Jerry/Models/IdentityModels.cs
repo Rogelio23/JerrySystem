@@ -20,6 +20,11 @@ namespace Jerry.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //En esta parte defino las tablas del sistema
+        public DbSet<Cliente> clientes { get; set; }
+        public DbSet<Salon> salones { get; set; }
+        public DbSet<Reservacion> reservaciones { get; set; }
+        public DbSet<Pago> pagos { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
