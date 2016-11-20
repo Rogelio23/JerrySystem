@@ -12,7 +12,7 @@ namespace Jerry.Models
         public int reservacionID { get; set; }
 
         [Required]
-        [Display(Name = "Fecha de la Reservacion")]
+        [Display(Name = "Fecha de Reservación")]
         [DataType(DataType.Date)]
         public DateTime fechaReservacion { get; set; }
 
@@ -30,7 +30,6 @@ namespace Jerry.Models
         public string Detalles { get; set; }
 
         [Required]
-        [Display(Name ="Salon")]
         public int salonID { get; set; }
         //Una reservacion es unicamente a un salon
         virtual public Salon salon { get; set; }

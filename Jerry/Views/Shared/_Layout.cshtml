@@ -29,7 +29,7 @@
                 </button>
                 @*<a class="navbar-brand" href="~/Views/Home/Index.cshtml">Binary admin</a>*@               
                    <ul class="navbar-brand">
-                        <li>@Html.ActionLink("Inicio", "Index", "Home",new { style="color:white"})</li>
+                        <li>@Html.ActionLink("Inicio", "Index", "Home","",new { style="color:white"})</li>
                    </ul>
             </div>
             <div style="color: white;
@@ -48,14 +48,15 @@ font-size: 16px;">Bienvenido &nbsp;<a href="login.html" class="btn btn-danger sq
 
                     <li>
                         @*<a class="active-menu" href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>*@
-                        @Html.ActionLink(" About", "About", "Home",new {@class= "fa fa-dashboard fa-3x"})
+                        @Html.ActionLink(" Clientes", "Index", "Clientes","", new { @class = "fa fa-user fa-2x" })
                     </li>
                     <li>
                         @*<a href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>*@
-                        @Html.ActionLink(" Contact", "Contact", "Home", new { @class = "fa fa-desktop fa-3x" })
+                        @Html.ActionLink(" Contact", "Contact", "Home","", new { @class = "fa fa-desktop fa-2x" })
                     </li>
                     <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
+                        @*<a href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>*@
+                        @Html.ActionLink(" Reservación", "Index", "Reservacion", "", new { @class = "fa fa-calendar fa-2x" })
                     </li>
                     <li>
                         <a href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
@@ -88,7 +89,7 @@ font-size: 16px;">Bienvenido &nbsp;<a href="login.html" class="btn btn-danger sq
                 @RenderBody()
                 <hr />
                 <footer>
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                    <p>&copy; @DateTime.Now.Year - @Html.RouteLink("netcode", new { }, new { href = "http://netcodesolutions.net/" }) </p>
                 </footer>
             </div>
         </div>
@@ -99,6 +100,6 @@ font-size: 16px;">Bienvenido &nbsp;<a href="login.html" class="btn btn-danger sq
             <script src="~/Scripts/morris/raphael-2.1.0.min.js"></script>
             <script src="~/Scripts/morris/morris.js"></script>
             <script src="~/Scripts/custom.js"></script>
-
+            @RenderSection("scripts", required: false)
 </body>
 </html>

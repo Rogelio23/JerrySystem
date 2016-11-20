@@ -12,7 +12,7 @@ namespace Jerry.Models
         public int salonID { get; set; }
 
         [Required]
-        [Display(Name ="Nombre")]
+        [Display(Name ="Salon")]
         public string nombre { get; set; }
 
         [Required]

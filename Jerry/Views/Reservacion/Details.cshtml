@@ -1,0 +1,67 @@
+﻿@model Jerry.Models.Reservacion
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Reservación</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salon.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salon.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaReservacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaReservacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaEvento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaEvento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detalles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detalles)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.reservacionID }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

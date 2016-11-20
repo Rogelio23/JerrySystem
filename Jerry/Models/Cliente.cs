@@ -33,6 +33,5 @@ namespace Jerry.Models
 
         //Un cliente tiene una coleccion de reservaciones, es decir, puede tener varias reservaciones
         virtual public ICollection<Reservacion> reservaciones { get; set; }
-
     }
 }
