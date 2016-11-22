@@ -50,7 +50,8 @@
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.clienteID }) |
             @Html.ActionLink("Detalles", "Details", new { id=item.clienteID }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.clienteID })
+            @Html.ActionLink("Borrar", "Delete", new { id=item.clienteID })|
+            @Html.ActionLink("Reservar", "CreateReservacion","Reservacion", new { id = item.clienteID },"")
         </td>
     </tr>
 }

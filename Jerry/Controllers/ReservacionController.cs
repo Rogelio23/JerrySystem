@@ -133,5 +133,11 @@ namespace Jerry.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult CreateReservacion(int id)
+        {
+            ViewBag.clienteID = id;
+            ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre");
+            return View();
+        }
     }
 }

@@ -13,11 +13,13 @@ namespace Jerry.Models
 
         [Required]
         [Display(Name = "Fecha de Reservación")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime fechaReservacion { get; set; }
 
         [Required]
         [Display(Name = "Fecha del Evento")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime fechaEvento { get; set; }
 

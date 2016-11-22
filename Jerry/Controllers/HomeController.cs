@@ -22,7 +22,7 @@ namespace Jerry.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Quinta Ventura.";
 
             return View();
         }

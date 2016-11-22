@@ -282,6 +282,7 @@
     <Content Include="Views\Pago\Details.cshtml" />
     <Content Include="Views\Pago\Edit.cshtml" />
     <Content Include="Views\Pago\Index.cshtml" />
+    <Content Include="Views\Reservacion\CreateReservacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
