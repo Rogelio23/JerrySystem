@@ -50,7 +50,7 @@ namespace Jerry.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "reservacionID,fechaReservacion,fechaEvento,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
+        public async Task<ActionResult> Create([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Jerry.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "reservacionID,fechaReservacion,fechaEvento,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
+        public async Task<ActionResult> Edit([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
             if (ModelState.IsValid)
             {
@@ -139,5 +139,6 @@ namespace Jerry.Controllers
             ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre");
             return View();
         }
+
     }
 }

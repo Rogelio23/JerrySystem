@@ -18,10 +18,16 @@ namespace Jerry.Models
         public DateTime fechaReservacion { get; set; }
 
         [Required]
-        [Display(Name = "Fecha del Evento")]
+        [Display(Name = "Inicio del evento")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public DateTime fechaEvento { get; set; }
+        public DateTime fechaEventoInicial { get; set; }
+
+        [Required]
+        [Display(Name = "Fin del evento")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public DateTime fechaEventoFinal { get; set; }
 
         [Required]
         [Display(Name ="Costo")]
@@ -45,5 +51,8 @@ namespace Jerry.Models
         //Una reservacion puede tener muchos pagos asociados a ella.
         virtual public ICollection<Pago> pagos { get; set; }
 
+
+
     }
 }
+
