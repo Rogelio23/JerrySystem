@@ -51,6 +51,24 @@ namespace Jerry.Models
         //Una reservacion puede tener muchos pagos asociados a ella.
         virtual public ICollection<Pago> pagos { get; set; }
 
+        
+        public static bool validarFecha(Reservacion reservacion)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            DateTime fechaI = reservacion.fechaEventoInicial;
+            DateTime fechaF = reservacion.fechaEventoFinal;
+            var query = db.reservaciones.Where(res=>res.fechaEventoInicial<=fechaI && res.fechaEventoFinal >= fechaI || res.fechaEventoInicial <= fechaF && res.fechaEventoFinal >= fechaF).Count();
+            //var query2= db.reservaciones.Where(res => res.fechaEventoFinal >= fechaI).Count();
+            if (query > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
 
 
     }

@@ -52,7 +52,7 @@ namespace Jerry.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && Reservacion.validarFecha(reservacion))
             {
                 db.reservaciones.Add(reservacion);
                 await db.SaveChangesAsync();
