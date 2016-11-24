@@ -17,6 +17,7 @@ namespace Jerry.Models
 
         [Required]
         [Display(Name ="Cantidad")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal cantidad { get; set; }
 
         [Required]

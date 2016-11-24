@@ -31,6 +31,7 @@ namespace Jerry.Models
 
         [Required]
         [Display(Name ="Costo")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal costo { get; set; }
 
         [Required]

@@ -25,13 +25,15 @@ namespace Jerry.Controllers
         // GET: Reservacion/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            
+            decimal pagado;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Reservacion reservacion = await db.reservaciones.FindAsync(id);
-            ViewBag.cantidadPagada = reservacion.pagos.Select(c => c.cantidad).Sum();
+            pagado = reservacion.pagos.Select(c => c.cantidad).Sum();
+            ViewBag.faltante = String.Format("{0:C}", reservacion.costo - pagado); 
+            ViewBag.cantidadPagada = String.Format("{0:C}", pagado);
             if (reservacion == null)
             {
                 return HttpNotFound();
