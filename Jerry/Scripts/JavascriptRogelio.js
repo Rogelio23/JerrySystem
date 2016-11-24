@@ -9,5 +9,12 @@
         confirmBox.find(".no").click(noFn);
         confirmBox.show();
     }
+    function mostarFormulario(formulario) {
+        //var frm = document.form1;
+        var frm = formulario;
+        if (frm.style.display == "block") { frm.style.display = "none" }
+        else
+            if (frm.style.display == "none") { frm.style.display = "block" }
+    }
     
    

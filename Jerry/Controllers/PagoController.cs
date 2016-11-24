@@ -56,7 +56,7 @@ namespace Jerry.Controllers
             {
                 db.pagos.Add(pago);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Reservacion", new { id = pago.reservacionID });
             }
 
             ViewBag.reservacionID = new SelectList(db.reservaciones, "reservacionID", "Detalles", pago.reservacionID);
