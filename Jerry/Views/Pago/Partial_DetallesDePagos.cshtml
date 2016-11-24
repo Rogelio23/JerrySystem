@@ -1,0 +1,34 @@
+﻿@model Jerry.Models.Reservacion
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pagos.FirstOrDefault().cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pagos.FirstOrDefault().fechaPago)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.pagos) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaPago)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pagoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pagoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pagoID })
+        </td>
+    </tr>
+}
+
+</table>

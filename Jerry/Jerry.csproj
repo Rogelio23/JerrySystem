@@ -198,6 +198,7 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\jquery.datetimepicker.min.css" />
+    <Content Include="Content\RogelioCSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -217,6 +218,7 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\JavascriptRogelio.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -291,6 +293,7 @@
     <Content Include="Views\Pago\Edit.cshtml" />
     <Content Include="Views\Pago\Index.cshtml" />
     <Content Include="Views\Reservacion\CreateReservacion.cshtml" />
+    <Content Include="Views\Pago\Partial_DetallesDePagos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

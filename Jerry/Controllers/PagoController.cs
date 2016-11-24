@@ -38,9 +38,10 @@ namespace Jerry.Controllers
         }
 
         // GET: Pago/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.reservacionID = new SelectList(db.reservaciones, "reservacionID", "Detalles");
+            
+            ViewBag.reservacionID = id;
             return View();
         }
 
@@ -129,5 +130,6 @@ namespace Jerry.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

@@ -52,6 +52,7 @@ namespace Jerry.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
+
             if (ModelState.IsValid && Reservacion.validarFecha(reservacion))
             {
                 db.reservaciones.Add(reservacion);
@@ -59,9 +60,12 @@ namespace Jerry.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.clienteID = new SelectList(db.clientes, "clienteID", "nombre", reservacion.clienteID);
+            
+            //ViewBag.clienteID = new SelectList(db.clientes, "clienteID", "nombre", reservacion.clienteID);
+            ViewBag.id = reservacion.clienteID;
             ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre", reservacion.salonID);
-            return View(reservacion);
+            //return View(reservacion);
+            return RedirectToAction("CreateReservacion", new { id = reservacion.clienteID });
         }
 
         // GET: Reservacion/Edit/5
