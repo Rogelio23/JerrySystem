@@ -99,11 +99,18 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div>
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Pagar" class="btn btn-default" />
                 </div>
             </div>
         </div>
     }
-@Html.Partial("../Pago/Partial_DetallesDePagos")
+<div class="hidden-print">
+    @Html.Partial("../Pago/Partial_DetallesDePagos")
+</div>
+<div class="hidden-print" style="display: inline-flex;">
+    <input type="button" class="hidden-print btn btn-primary"
+           onClick="window.print()"
+           value="Print Detalles" />
+</div>
