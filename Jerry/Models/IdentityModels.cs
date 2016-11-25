@@ -34,5 +34,7 @@ namespace Jerry.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Jerry.Models.Correo> Correos { get; set; }
     }
 }

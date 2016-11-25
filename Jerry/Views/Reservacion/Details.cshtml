@@ -3,9 +3,23 @@
 @{
     ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Jerry.Models.Correo correo = new Jerry.Models.Correo();
+    correo.To = Model.cliente.email;
+    correo.Subject = "Estado de cuenta";
+    correo.Body = "Buen dia, acontinuacion se envia el estado de cuenta";
 }
 
 <h2>Detalles</h2>
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ('@ViewBag.Message' == 'Sent') {
+                alert('Mail has been sent successfully');
+            }
+        });
+    </script>
 
 <div>
     <h4>Reservación</h4>
@@ -75,12 +89,12 @@
 
     </dl>
 </div>
-<p>
+<p class = "hidden-print">
     @Html.ActionLink("Editar", "Edit", new { id = Model.reservacionID }) |
     @Html.ActionLink("Regresar", "Index")
 </p>
-
-    @using (Html.BeginForm("create","Pago"))
+<div class="hidden-print">
+    @using (Html.BeginForm("create", "Pago"))
     {
         @Html.AntiForgeryToken()
 
@@ -106,11 +120,33 @@
             </div>
         </div>
     }
-<div class="hidden-print">
+</div>
+<div>
     @Html.Partial("../Pago/Partial_DetallesDePagos")
 </div>
 <div class="hidden-print" style="display: inline-flex;">
     <input type="button" class="hidden-print btn btn-primary"
            onClick="window.print()"
            value="Print Detalles" />
+</div>
+
+<div class="hidden-print">
+    @using (@Html.BeginForm("EnviarCorreo", "Correo", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+    {
+    @Html.ValidationSummary()
+    @Html.Hidden("To",correo.To)
+    @Html.Hidden("Subject",correo.Subject)
+    @Html.Hidden("Body",correo.Body)
+    <table>
+        <tr>
+            <td>
+                Adjuntar estado de cuenta
+            </td>
+            <td>
+                <input type="file" name="fileUploader" />
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Send" />
+    }
 </div>

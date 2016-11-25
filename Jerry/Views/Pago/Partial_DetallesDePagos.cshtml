@@ -21,10 +21,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.fechaPago)
         </td>
-        <td>
+        <td class = "hidden-print">
             @*@Html.ActionLink("Edit", "Edit","Pago" ,new { id=item.pagoID },"") |
             @Html.ActionLink("Details", "Details", "Pago", new { id=item.pagoID },"")*@ |
-            @Html.ActionLink("Delete", "Delete", "Pago", new { id=item.pagoID },"")
+            @Html.ActionLink("Delete", "Delete", "Pago", new { id=item.pagoID }, "")
         </td>
     </tr>
 }

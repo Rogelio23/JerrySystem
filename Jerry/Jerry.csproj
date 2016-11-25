@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PagoController.cs" />
@@ -181,10 +182,14 @@
     <Compile Include="Migrations\201611230437013_migracionPrueba.Designer.cs">
       <DependentUpon>201611230437013_migracionPrueba.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611250420106_ModeloDeCorreo.cs" />
+    <Compile Include="Migrations\201611250420106_ModeloDeCorreo.Designer.cs">
+      <DependentUpon>201611250420106_ModeloDeCorreo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\correo.cs" />
+    <Compile Include="Models\Correo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pago.cs" />
@@ -296,6 +301,12 @@
     <Content Include="Views\Pago\Index.cshtml" />
     <Content Include="Views\Reservacion\CreateReservacion.cshtml" />
     <Content Include="Views\Pago\Partial_DetallesDePagos.cshtml" />
+    <Content Include="Views\Correo\Create.cshtml" />
+    <Content Include="Views\Correo\Delete.cshtml" />
+    <Content Include="Views\Correo\Details.cshtml" />
+    <Content Include="Views\Correo\Edit.cshtml" />
+    <Content Include="Views\Correo\Index.cshtml" />
+    <Content Include="Views\Correo\EnviarCorreo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +323,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611230437013_migracionPrueba.resx">
       <DependentUpon>201611230437013_migracionPrueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611250420106_ModeloDeCorreo.resx">
+      <DependentUpon>201611250420106_ModeloDeCorreo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
