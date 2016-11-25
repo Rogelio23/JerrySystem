@@ -15,7 +15,9 @@ namespace Jerry.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Reservacion
+
+        // GET: Reservacion}
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             var reservaciones = db.reservaciones.Include(r => r.cliente).Include(r => r.salon);
@@ -23,6 +25,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             decimal pagado;
@@ -43,6 +46,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.clienteID = new SelectList(db.clientes, "clienteID", "nombre");
@@ -55,6 +59,7 @@ namespace Jerry.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
 
@@ -74,6 +79,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +100,7 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
@@ -109,6 +116,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,6 +132,7 @@ namespace Jerry.Controllers
         }
 
         // POST: Reservacion/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

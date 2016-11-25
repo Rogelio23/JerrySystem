@@ -16,6 +16,7 @@ namespace Jerry.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Pago
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             var pagos = db.pagos.Include(p => p.reservacion);
@@ -23,6 +24,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Pago/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Pago/Create
+        [Authorize]
         public ActionResult Create(int id)
         {
             
@@ -64,6 +67,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Pago/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "pagoID,reservacionID,cantidad,fechaPago")] Pago pago)
         {
@@ -97,6 +102,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Pago/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -113,6 +119,7 @@ namespace Jerry.Controllers
 
         // POST: Pago/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
