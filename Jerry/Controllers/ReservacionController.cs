@@ -38,13 +38,7 @@ namespace Jerry.Controllers
             pagado = reservacion.pagos.Select(c => c.cantidad).Sum();
             ViewBag.faltante = String.Format("{0:C}", reservacion.costo - pagado);
             ViewBag.cantidadPagada = String.Format("{0:C}", pagado);
-            var email = db.Correos.Find(1);
-            ViewBag.emailAdmin = email.correoAdmin;
-            ViewBag.asunto = email.Subject;
-            ViewBag.cuerpo = email.Body;
-            ViewBag.contrasena = email.contrasena;
-            ViewBag.smtp = email.smtpHost;
-            ViewBag.puerto = email.puertoCorreo;
+
             if (reservacion == null)
             {
                 return HttpNotFound();

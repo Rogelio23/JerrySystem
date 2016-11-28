@@ -221,6 +221,8 @@
     <Content Include="Images\4.png" />
     <Content Include="Images\find_user.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo2.jpg" />
+    <Content Include="Images\Logo3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />

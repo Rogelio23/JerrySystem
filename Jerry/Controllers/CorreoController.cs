@@ -149,6 +149,13 @@ namespace Jerry.Controllers
         {
             if (ModelState.IsValid)
             {
+                var DatosCorreo = db.Correos.First();
+                objModelMail.contrasena = DatosCorreo.contrasena;
+                objModelMail.Subject = DatosCorreo.Subject;
+                objModelMail.Body = DatosCorreo.Body;
+                objModelMail.correoAdmin = DatosCorreo.correoAdmin;
+                objModelMail.puertoCorreo = DatosCorreo.puertoCorreo;
+                objModelMail.smtpHost = DatosCorreo.smtpHost;
                 string from = objModelMail.correoAdmin; //example:- sourabh9303@gmail.com
                 using (MailMessage mail = new MailMessage(from, objModelMail.To))
                 {

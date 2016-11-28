@@ -6,92 +6,79 @@
 
     Jerry.Models.Correo correo = new Jerry.Models.Correo();
     correo.To = Model.cliente.email;
-    //correo.Subject = "Estado de cuenta";
-    //correo.Body = "Buen dia, acontinuacion se envia el estado de cuenta";
-    correo.correoAdmin = ViewBag.emailAdmin;
-    correo.Subject = ViewBag.asunto;
-    correo.Body = ViewBag.cuerpo;
-    correo.contrasena = ViewBag.contrasena;
-    correo.smtpHost = ViewBag.smtp;
-    correo.puertoCorreo = ViewBag.puerto;
-
 }
-
 <h2>Detalles</h2>
 
+<div class="row">
+    <div class="col-xs-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.cliente.nombre)
+            </dt>
 
-<div>
-    <h4>Reservación</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.cliente.nombre)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.cliente.nombre) @Html.DisplayFor(model => model.cliente.apellidoP) @Html.DisplayFor(model => model.cliente.apellidoM)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.cliente.nombre)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.salon.nombre)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.salon.nombre)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.salon.nombre)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.salon.nombre)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Detalles)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaReservacion)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Detalles)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaReservacion)
-        </dd>
+            <dt>
+                Fecha del evento
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaEventoInicial)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.fechaEventoInicial)
+            </dd>
+            </dl>
+    </div>
+    <div class="col-xs-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.costo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaEventoInicial)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.costo)
+            </dd>
+            <dt>
+                @Html.Label("Cantidad Pagada")
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.costo)
-        </dt>
+            <dd>
+                @Html.Display("cantidadPagada")
+            </dd>
+            <dt>
+                @Html.Label("Cantidad Faltante")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.costo)
-        </dd>
-        <dt>
-            @Html.Label("Cantidad Pagada")
-        </dt>
+            <dd>
+                @Html.Display("faltante")
+            </dd>
+        </dl>
 
-        <dd>
-            @Html.Display("cantidadPagada")
-        </dd>
-        <dt>
-            @Html.Label("Cantidad Faltante")
-        </dt>
-
-        <dd>
-            @Html.Display("faltante")
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.Detalles)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Detalles)
-        </dd>
-
-    </dl>
+    </div>
 </div>
+
+
 <p class = "hidden-print">
     @Html.ActionLink("Editar", "Edit", new { id = Model.reservacionID }) |
     @Html.ActionLink("Regresar", "Index")
 </p>
+<p>
 <div class="hidden-print">
     @using (Html.BeginForm("create", "Pago"))
     {
@@ -120,26 +107,24 @@
         </div>
     }
 </div>
-<div>
-    @Html.Partial("../Pago/Partial_DetallesDePagos")
-</div>
-<div class="hidden-print" style="display: inline-flex;">
-    <input type="button" class="hidden-print btn btn-primary"
-           onClick="window.print()"
-           value="Print Detalles" />
-</div>
+</p>
 
+<p>
+    <div>
+        @Html.Partial("../Pago/Partial_DetallesDePagos")
+    </div>
+    <div class="hidden-print" style="display: inline-flex;">
+        <input type="button" class="hidden-print btn btn-primary"
+               onClick="window.print()"
+               value="Print Detalles" />
+    </div>
+</p>
 <div class="hidden-print">
     @using (@Html.BeginForm("EnviarCorreo", "Correo", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
     {
     @Html.ValidationSummary()
     @Html.Hidden("To",correo.To)
-    @Html.Hidden("Subject",correo.Subject)
-    @Html.Hidden("Body",correo.Body)
-    @Html.Hidden("correoAdmin", correo.correoAdmin)
-    @Html.Hidden("smtpHost", correo.smtpHost)
-    @Html.Hidden("puertoCorreo", correo.puertoCorreo)
-    @Html.Hidden("contrasena", correo.contrasena)
+
     <table>
         <tr>
             <td>
