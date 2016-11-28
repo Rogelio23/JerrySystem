@@ -53,7 +53,7 @@ namespace Jerry.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "correoID,To,Subject,Body")] Correo correo)
+        public async Task<ActionResult> Create([Bind(Include = "correoID,To,Subject,Body,correoAdmin,contrasena,smtpHost,puertoCorreo")] Correo correo)
         {
             if (ModelState.IsValid)
             {
@@ -87,13 +87,13 @@ namespace Jerry.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "correoID,To,Subject,Body")] Correo correo)
+        public async Task<ActionResult> Edit([Bind(Include = "correoID,To,Subject,Body,correoAdmin,contrasena,smtpHost,puertoCorreo")] Correo correo)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(correo).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = 1 });
             }
             return View(correo);
         }
@@ -149,7 +149,7 @@ namespace Jerry.Controllers
         {
             if (ModelState.IsValid)
             {
-                string from = "rogelio_135@hotmail.com"; //example:- sourabh9303@gmail.com
+                string from = objModelMail.correoAdmin; //example:- sourabh9303@gmail.com
                 using (MailMessage mail = new MailMessage(from, objModelMail.To))
                 {
                     mail.Subject = objModelMail.Subject;
@@ -161,9 +161,11 @@ namespace Jerry.Controllers
                     }
                     mail.IsBodyHtml = false;
                     SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp-mail.outlook.com";
+                    //smtp.Host = "smtp-mail.outlook.com";
+                    smtp.Host = objModelMail.smtpHost;
                     smtp.EnableSsl = true;
-                    NetworkCredential networkCredential = new NetworkCredential(from, "baltasar153");
+                    //NetworkCredential networkCredential = new NetworkCredential(from, "baltasar153");
+                    NetworkCredential networkCredential = new NetworkCredential(from, objModelMail.contrasena);
                     smtp.UseDefaultCredentials = true;
                     smtp.Credentials = networkCredential;
                     smtp.Port = 587;

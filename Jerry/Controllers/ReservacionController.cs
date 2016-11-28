@@ -8,12 +8,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Jerry.Models;
-
+using Jerry.ViewModels;
 namespace Jerry.Controllers
 {
     public class ReservacionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
 
 
         // GET: Reservacion}
@@ -35,13 +36,20 @@ namespace Jerry.Controllers
             }
             Reservacion reservacion = await db.reservaciones.FindAsync(id);
             pagado = reservacion.pagos.Select(c => c.cantidad).Sum();
-            ViewBag.faltante = String.Format("{0:C}", reservacion.costo - pagado); 
+            ViewBag.faltante = String.Format("{0:C}", reservacion.costo - pagado);
             ViewBag.cantidadPagada = String.Format("{0:C}", pagado);
+            var email = db.Correos.Find(1);
+            ViewBag.emailAdmin = email.correoAdmin;
+            ViewBag.asunto = email.Subject;
+            ViewBag.cuerpo = email.Body;
+            ViewBag.contrasena = email.contrasena;
+            ViewBag.smtp = email.smtpHost;
+            ViewBag.puerto = email.puertoCorreo;
             if (reservacion == null)
             {
                 return HttpNotFound();
             }
-            
+
             return View(reservacion);
         }
 
@@ -70,7 +78,7 @@ namespace Jerry.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
             //ViewBag.clienteID = new SelectList(db.clientes, "clienteID", "nombre", reservacion.clienteID);
             ViewBag.id = reservacion.clienteID;
             ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre", reservacion.salonID);
@@ -156,6 +164,17 @@ namespace Jerry.Controllers
             ViewBag.clienteID = id;
             ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre");
             return View();
+        }
+        public JsonResult ReservacionesConflictivas(/*object fechaI, object fechaF*/)
+        {
+            DateTime fechaI = DateTime.Parse("2016/12/25");
+            DateTime fechaF = DateTime.Parse("2016/12/26");
+            var res = from R in db.reservaciones.
+                      Where(R => R.fechaEventoInicial <= (DateTime)fechaI && R.fechaEventoFinal >= (DateTime)fechaI ||
+                      R.fechaEventoInicial <= (DateTime)fechaF && R.fechaEventoFinal >= (DateTime)fechaF).ToList()
+                      select new ReservacionesViewModel(R);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
 
     }

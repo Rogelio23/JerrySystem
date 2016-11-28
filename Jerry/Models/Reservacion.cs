@@ -67,6 +67,25 @@ namespace Jerry.Models
             }
 
         }
+        public static bool ObtenerReservaciones(object fechaI, object fechaF, out IEnumerable<Jerry.Models.Reservacion> resultado)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+    
+            if (fechaI==null || fechaF==null)
+            {
+                List<Jerry.Models.Reservacion> query = new List<Reservacion>();
+                resultado = query;
+                return false;
+            }
+            else
+            {
+                List<Jerry.Models.Reservacion> query = db.reservaciones.Where(res => res.fechaEventoInicial <= (DateTime)fechaI && res.fechaEventoFinal >= (DateTime)fechaI || res.fechaEventoInicial <= (DateTime)fechaF && res.fechaEventoFinal >= (DateTime)fechaF).ToList();
+                resultado = query;
+                return true;
+            }
+
+        }
 
 
     }
