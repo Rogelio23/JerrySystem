@@ -1,23 +1,16 @@
 ﻿@model Jerry.Models.Correo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Configuración";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Configuración del Correo Electronico</h2>
 
 <div>
     <h4>Correo</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.To)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.To)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Subject)
@@ -35,9 +28,32 @@
             @Html.DisplayFor(model => model.Body)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.correoAdmin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correoAdmin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.smtpHost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.smtpHost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.puertoCorreo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.puertoCorreo)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.correoID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.correoID })
 </p>

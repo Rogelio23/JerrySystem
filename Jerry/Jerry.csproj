@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201611250420106_ModeloDeCorreo.Designer.cs">
       <DependentUpon>201611250420106_ModeloDeCorreo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611280514453_migracionCorreoDatos.cs" />
+    <Compile Include="Migrations\201611280514453_migracionCorreoDatos.Designer.cs">
+      <DependentUpon>201611280514453_migracionCorreoDatos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -197,6 +201,7 @@
     <Compile Include="Models\Salon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ReservacionesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -216,6 +221,8 @@
     <Content Include="Images\4.png" />
     <Content Include="Images\find_user.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo2.jpg" />
+    <Content Include="Images\Logo3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
@@ -303,14 +310,14 @@
     <Content Include="Views\Pago\Partial_DetallesDePagos.cshtml" />
     <Content Include="Views\Correo\Create.cshtml" />
     <Content Include="Views\Correo\Delete.cshtml" />
-    <Content Include="Views\Correo\Details.cshtml" />
-    <Content Include="Views\Correo\Edit.cshtml" />
-    <Content Include="Views\Correo\Index.cshtml" />
     <Content Include="Views\Correo\EnviarCorreo.cshtml" />
+    <Content Include="Views\Reservacion\Partial_Reservaciones.cshtml" />
+    <Content Include="Views\Correo\Index.cshtml" />
+    <Content Include="Views\Correo\Edit.cshtml" />
+    <Content Include="Views\Correo\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -326,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611250420106_ModeloDeCorreo.resx">
       <DependentUpon>201611250420106_ModeloDeCorreo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280514453_migracionCorreoDatos.resx">
+      <DependentUpon>201611280514453_migracionCorreoDatos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

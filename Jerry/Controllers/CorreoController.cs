@@ -18,12 +18,14 @@ namespace Jerry.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Correo
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             return View(await db.Correos.ToListAsync());
         }
 
         // GET: Correo/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,6 +41,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Correo/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -48,8 +51,9 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "correoID,To,Subject,Body")] Correo correo)
+        public async Task<ActionResult> Create([Bind(Include = "correoID,To,Subject,Body,correoAdmin,contrasena,smtpHost,puertoCorreo")] Correo correo)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +66,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Correo/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,19 +85,21 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "correoID,To,Subject,Body")] Correo correo)
+        public async Task<ActionResult> Edit([Bind(Include = "correoID,To,Subject,Body,correoAdmin,contrasena,smtpHost,puertoCorreo")] Correo correo)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(correo).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = 1 });
             }
             return View(correo);
         }
 
         // GET: Correo/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,6 +116,7 @@ namespace Jerry.Controllers
 
         // POST: Correo/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
@@ -136,11 +144,19 @@ namespace Jerry.Controllers
         /// <param name="fileUploader">Selected file data, example-filename,content,content type(file type- .txt,.png etc.),length etc.</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult EnviarCorreo(Jerry.Models.Correo objModelMail, HttpPostedFileBase fileUploader)
         {
             if (ModelState.IsValid)
             {
-                string from = "rogelio_135@hotmail.com"; //example:- sourabh9303@gmail.com
+                var DatosCorreo = db.Correos.First();
+                objModelMail.contrasena = DatosCorreo.contrasena;
+                objModelMail.Subject = DatosCorreo.Subject;
+                objModelMail.Body = DatosCorreo.Body;
+                objModelMail.correoAdmin = DatosCorreo.correoAdmin;
+                objModelMail.puertoCorreo = DatosCorreo.puertoCorreo;
+                objModelMail.smtpHost = DatosCorreo.smtpHost;
+                string from = objModelMail.correoAdmin; //example:- sourabh9303@gmail.com
                 using (MailMessage mail = new MailMessage(from, objModelMail.To))
                 {
                     mail.Subject = objModelMail.Subject;
@@ -152,9 +168,11 @@ namespace Jerry.Controllers
                     }
                     mail.IsBodyHtml = false;
                     SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp-mail.outlook.com";
+                    //smtp.Host = "smtp-mail.outlook.com";
+                    smtp.Host = objModelMail.smtpHost;
                     smtp.EnableSsl = true;
-                    NetworkCredential networkCredential = new NetworkCredential(from, "baltasar153");
+                    //NetworkCredential networkCredential = new NetworkCredential(from, "baltasar153");
+                    NetworkCredential networkCredential = new NetworkCredential(from, objModelMail.contrasena);
                     smtp.UseDefaultCredentials = true;
                     smtp.Credentials = networkCredential;
                     smtp.Port = 587;

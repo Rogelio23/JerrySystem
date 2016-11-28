@@ -21,6 +21,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Body)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.correoAdmin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contrasena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.smtpHost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.puertoCorreo)
+        </th>
         <th></th>
     </tr>
 
@@ -34,6 +46,18 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correoAdmin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contrasena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.smtpHost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.puertoCorreo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.correoID }) |

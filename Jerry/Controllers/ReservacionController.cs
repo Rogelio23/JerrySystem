@@ -8,14 +8,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Jerry.Models;
-
+using Jerry.ViewModels;
 namespace Jerry.Controllers
 {
     public class ReservacionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Reservacion
+
+
+        // GET: Reservacion}
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             var reservaciones = db.reservaciones.Include(r => r.cliente).Include(r => r.salon);
@@ -23,6 +26,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             decimal pagado;
@@ -32,17 +36,19 @@ namespace Jerry.Controllers
             }
             Reservacion reservacion = await db.reservaciones.FindAsync(id);
             pagado = reservacion.pagos.Select(c => c.cantidad).Sum();
-            ViewBag.faltante = String.Format("{0:C}", reservacion.costo - pagado); 
+            ViewBag.faltante = String.Format("{0:C}", reservacion.costo - pagado);
             ViewBag.cantidadPagada = String.Format("{0:C}", pagado);
+
             if (reservacion == null)
             {
                 return HttpNotFound();
             }
-            
+
             return View(reservacion);
         }
 
         // GET: Reservacion/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.clienteID = new SelectList(db.clientes, "clienteID", "nombre");
@@ -55,6 +61,7 @@ namespace Jerry.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
 
@@ -65,7 +72,7 @@ namespace Jerry.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
             //ViewBag.clienteID = new SelectList(db.clientes, "clienteID", "nombre", reservacion.clienteID);
             ViewBag.id = reservacion.clienteID;
             ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre", reservacion.salonID);
@@ -74,6 +81,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +102,7 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "reservacionID,fechaReservacion,fechaEventoInicial,fechaEventoFinal,costo,Detalles,salonID,clienteID")] Reservacion reservacion)
         {
@@ -109,6 +118,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Reservacion/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,6 +134,7 @@ namespace Jerry.Controllers
         }
 
         // POST: Reservacion/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -147,6 +158,17 @@ namespace Jerry.Controllers
             ViewBag.clienteID = id;
             ViewBag.salonID = new SelectList(db.salones, "salonID", "nombre");
             return View();
+        }
+        public JsonResult ReservacionesConflictivas(/*object fechaI, object fechaF*/)
+        {
+            DateTime fechaI = DateTime.Parse("2016/12/25");
+            DateTime fechaF = DateTime.Parse("2016/12/26");
+            var res = from R in db.reservaciones.
+                      Where(R => R.fechaEventoInicial <= (DateTime)fechaI && R.fechaEventoFinal >= (DateTime)fechaI ||
+                      R.fechaEventoInicial <= (DateTime)fechaF && R.fechaEventoFinal >= (DateTime)fechaF).ToList()
+                      select new ReservacionesViewModel(R);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
 
     }

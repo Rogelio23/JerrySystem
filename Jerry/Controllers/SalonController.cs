@@ -16,12 +16,14 @@ namespace Jerry.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Salon
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             return View(await db.salones.ToListAsync());
         }
 
         // GET: Salon/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Salon/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "salonID,nombre,detalles")] Salon salon)
         {
@@ -60,6 +64,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Salon/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace Jerry.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "salonID,nombre,detalles")] Salon salon)
         {
@@ -91,6 +97,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Salon/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace Jerry.Controllers
 
         // POST: Salon/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {

@@ -8,6 +8,7 @@ namespace Jerry.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
@@ -15,7 +16,7 @@ namespace Jerry.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Esta Pagina fue elaborada por Netcode";
 
             return View();
         }
