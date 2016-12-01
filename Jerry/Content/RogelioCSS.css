@@ -32,3 +32,18 @@
     text-align: left;
     margin-bottom: 8px;
 }
+
+#registerLink{
+    color:#C90000 !important;
+    font-size:150%;
+}
+#loginLink{
+    color:#C90000 !important;
+    text-align:center;
+    font-size:150%;
+}
+#logoutForm {
+    color:#C90000 !important;
+    text-align:center;
+    font-size:150%;
+}

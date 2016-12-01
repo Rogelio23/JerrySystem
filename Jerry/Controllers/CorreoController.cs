@@ -25,7 +25,7 @@ namespace Jerry.Controllers
         }
 
         // GET: Correo/Details/5
-        [Authorize]
+        [Authorize(Roles ="Administrador")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
