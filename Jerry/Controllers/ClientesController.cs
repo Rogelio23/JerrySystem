@@ -97,7 +97,8 @@ namespace Jerry.Controllers
         }
 
         // GET: Clientes/Delete/5
-        [Authorize]
+        //[Authorize]
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -114,7 +115,8 @@ namespace Jerry.Controllers
 
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize]
+        //[Authorize]
+        [Authorize(Roles = "Administrador")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
