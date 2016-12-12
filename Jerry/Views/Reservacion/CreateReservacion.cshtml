@@ -117,12 +117,6 @@
             <td>
                 @Html.DisplayFor(R => item.fechaEventoInicial)
             </td>
-            <td>
-                @Html.DisplayFor(R => item.fechaEventoFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(R => item.Detalles)
-            </td>
 
         </tr>
     }
@@ -150,19 +144,29 @@
             $("input[type='datetime']").datetimepicker();
     </script>
     <script>
-        $(document).ready(function () {
-            $('#tablaCargada').on('input', function () {
+            $('input#fechas').blur(function () {
                 $.ajax({
                     type: 'GET',
-                    url: @Url.Action("ReservacionesConflictivas", "Reservacion"),
-                    success:function(resultado){
-                        $('#fechas').val(resultado);
+                    url: "@Url.Action("ReservacionesConflictivas", "Reservacion")",
+                    success: function (resultado) {
+                        //$("#tablaCargada").remove('.rowData');
+                        var trs = $("#tablaCargada tr").length;
+                        if (trs > 1) {
+                            // Eliminamos la ultima columna
+                            $("#tablaCargada tr:last").remove();
+                        }
+                        $("#tablaCargada").parent("tr").remove();
+                        var datos = resultado[0];
+                        var newR = $('<tr>').addClass('rowData');
+                        $('<td>').html(datos.nombre).appendTo(newR);
+                        $('<td>').html(datos.nombreSalon).appendTo(newR);
+                        $('<td>').html(datos.fechaEventoInicial).appendTo(newR);
+                        newR.appendTo("#tablaCargada");
                     }
                 });
 
             });
 
-        });
 
     </script>
 }

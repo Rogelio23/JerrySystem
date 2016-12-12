@@ -161,8 +161,16 @@ namespace Jerry.Controllers
         }
         public JsonResult ReservacionesConflictivas(/*object fechaI, object fechaF*/)
         {
-            DateTime fechaI = DateTime.Parse("2016/12/25");
+            DateTime fechaI = DateTime.Parse("2016/01/25");
             DateTime fechaF = DateTime.Parse("2016/12/26");
+
+
+            //var res = from R in db.reservaciones.
+            //          Where(R => R.fechaEventoInicial <= (DateTime)fechaI && R.fechaEventoFinal >= (DateTime)fechaI ||
+            //          R.fechaEventoInicial <= (DateTime)fechaF && R.fechaEventoFinal >= (DateTime)fechaF).ToList()
+            //          select new ReservacionesViewModel(R);
+
+            //var res = Jerry.ViewModels.ReservacionesViewModel.ObtenerReservaciones();
             var res = from R in db.reservaciones.
                       Where(R => R.fechaEventoInicial <= (DateTime)fechaI && R.fechaEventoFinal >= (DateTime)fechaI ||
                       R.fechaEventoInicial <= (DateTime)fechaF && R.fechaEventoFinal >= (DateTime)fechaF).ToList()

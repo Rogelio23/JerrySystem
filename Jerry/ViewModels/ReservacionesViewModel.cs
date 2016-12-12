@@ -50,6 +50,50 @@ namespace Jerry.ViewModels
             this.Detalles = reservacion.Detalles;
             this.costo = reservacion.costo;
         }
+        public ReservacionesViewModel(List<Reservacion> reservacion)
+        {
+           foreach(var R in reservacion)
+            {
+                this.nombre = R.cliente.nombre;
+                this.nombreSalon = R.salon.nombre;
+                this.fechaEventoInicial = R.fechaEventoInicial;
+                this.fechaEventoFinal = R.fechaEventoFinal;
+                this.Detalles = R.Detalles;
+                this.costo = R.costo;
+            }
+            
+        }
+
+        public static IEnumerable<Jerry.ViewModels.ReservacionesViewModel> ObtenerReservaciones()
+        {
+            DateTime fechaI = DateTime.Parse("2016/01/25");
+            DateTime fechaF = DateTime.Parse("2016/12/26");
+            ApplicationDbContext db = new ApplicationDbContext();
+
+
+            if (fechaI == null || fechaF == null)
+            {
+                List<Jerry.ViewModels.ReservacionesViewModel> query = new List<Jerry.ViewModels.ReservacionesViewModel>();
+                return query;
+                
+            }
+            else
+            {
+
+                var query = from R in db.reservaciones.
+                      Where(R => R.fechaEventoInicial <= (DateTime)fechaI && R.fechaEventoFinal >= (DateTime)fechaI).ToList()
+                          select new ReservacionesViewModel(R);
+
+
+                return query;                
+            }
+
+        }
+
+
+
+
+
 
     }
 }
